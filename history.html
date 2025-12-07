@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Practice History</title>
+    <link href="history-styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+</head>
+<body onload="initHistory()">
+    
+    <div class="main-wrapper">
+        <div class="container">
+            
+            <header class="page-header">
+                <button id="backBtn" class="nav-glass-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                    <span>Back</span>
+                </button>
+                <div class="header-title-wrapper">
+                    <div class="header-title">Overview</div>
+                </div>
+                <div style="width: 80px;"></div>
+            </header>
+
+            <div class="level-card" id="levelCard">
+                <div class="level-icon-wrapper">
+                    <div class="level-icon" id="levelIcon">🌱</div>
+                </div>
+                
+                <div class="level-info">
+                    <div class="level-header-row">
+                        <div class="level-title-group">
+                            <span class="level-label">Current Rank</span>
+                            <div class="level-name" id="levelTitle">Arambha</div>
+                        </div>
+                        <div class="level-percent-badge" id="levelPercentBadge">0%</div>
+                    </div>
+                    
+                    <div class="level-progress-container">
+                        <div class="level-progress-bg">
+                            <div class="level-progress-fill" id="levelBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="level-subtitle" id="levelNext">Target: 50 mins/day</div>
+                </div>
+            </div>
+    
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Total Sessions</div>
+                    <div class="stat-big-number" id="statSessions">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Minutes</div>
+                    <div class="stat-big-number" id="statDurationNumeric">0.0</div>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="tabs-wrapper">
+                    <div class="pill-tabs">
+                        <div class="tab" data-view="day">Day</div>
+                        <div class="tab active" data-view="week">Week</div>
+                        <div class="tab" data-view="month">Month</div>
+                        <div class="tab" data-view="year">Year</div>
+                    </div>
+                </div>
+
+                <div class="date-nav-row">
+                    <button class="nav-arrow" id="prevPeriodBtn">&lt;</button>
+                    <span class="date-range-text" id="dateRangeDisplay">...</span>
+                    <button class="nav-arrow" id="nextPeriodBtn">&gt;</button>
+                </div>
+
+                <div class="summary-info-row">
+                    <div class="summary-item left">
+                        TOTAL <span id="chartTotalDisplay">0 min</span>
+                    </div>
+                    <div class="summary-item right">
+                        AVG <span id="chartAvgDisplay">0 min/day</span>
+                    </div>
+                </div>
+    
+                <div class="chart-canvas-wrapper">
+                    <canvas id="practiceChart"></canvas>
+                </div>
+            </div>
+
+            <div class="missed-card">
+                <div class="section-header" style="margin-top:0; margin-bottom:15px;">
+                    <div class="header-title small" id="missedCardTitle" style="color:#ef4444;">Missed Practice</div>
+                    <div class="missed-badge" id="missedCountBadge">0</div>
+                </div>
+                
+                <div class="missed-list" id="missedDaysList"></div>
+                <div id="calendarViewContainer" class="calendar-container" style="display:none;"></div>
+                
+                <div id="calendarLegend" class="cal-legend" style="display:none;">
+                    <div class="cal-legend-item">
+                        <div class="cal-dot-legend practiced"></div>
+                        <span>Done</span>
+                    </div>
+                    <div class="cal-legend-item">
+                        <div class="cal-dot-legend missed"></div>
+                        <span>Missed</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <div class="header-title small">Detailed Log</div>
+            </div>
+
+            <div class="log-card">
+                <div class="log-list" id="detailedLogList">
+                    <div style="padding:20px; text-align:center; color:var(--text-muted);">Loading...</div>
+                </div>
+            </div>
+
+            <div class="section-header" style="margin-top: 30px;">
+                <div class="header-title small">Data Management</div>
+            </div>
+            <div style="display:flex; gap:10px; margin-bottom: 20px;">
+                <button id="exportBtn" class="footer-text-btn neutral" style="flex:1;">Export JSON</button>
+                <button id="importBtn" class="footer-text-btn neutral" style="flex:1;">Import JSON</button>
+                <input type="file" id="importFile" style="display:none">
+            </div>
+            
+            <button id="clearHistoryBtn" class="footer-text-btn" style="margin-top: 10px;">Clear Data</button>
+    
+        </div>
+    </div>
+    
+    <script src="history-script.js"></script>
+</body>
+</html>

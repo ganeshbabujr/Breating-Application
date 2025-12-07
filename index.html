@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Pranayamam</title>
+    <link rel="manifest" href="manifest.json">
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="glass-card">
+        
+        <div class="layout-top-zone">
+            <header>
+                <div class="brand">
+                    <div class="logo-icon">G</div>
+                    <div class="brand-text">
+                        <div class="brand-title">Pranayamam</div>
+                        <div class="brand-subtitle">Breath & Focus</div>
+                    </div>
+                </div>
+                <div style="display:flex; gap:10px">
+                    <button class="icon-btn" id="themeToggle" title="Switch Theme">☀</button>
+                    <button class="icon-btn" id="settingsToggle" title="Settings">⚙</button>
+                </div>
+            </header>
+
+            <div class="circle-spacer">
+                <div class="circle-wrap">
+                    <div class="circle" id="visualCircle">
+                        <div class="circle-content">
+                            <div class="number" id="mainNumber">8</div>
+                            <div class="phase-label" id="mainPhase">INHALE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layout-bottom-zone">
+ 
+            
+            <!-- Compact Nostril Indicator Panel (below capsule) -->
+            <div id="nostrilPanel" class="nostril-panel nadi-hidden" aria-hidden="true">
+              <div class="nostril-pill nostril-left-pill" id="nostrilLeftP">
+                <div class="nostril-dot-small" id="nostrilLeftDot"></div>
+                <div class="nostril-text">Left</div>
+              </div>
+              <div class="nostril-sep"></div>
+              <div class="nostril-pill nostril-right-pill" id="nostrilRightP">
+                <div class="nostril-dot-small" id="nostrilRightDot"></div>
+                <div class="nostril-text">Right</div>
+              </div>
+            </div>
+
+            
+            <div class="modern-capsule">
+                <div class="capsule-dot" id="capsuleDot"></div>
+                <div class="capsule-text" id="patternDisplay">Adhama (8-16-8)</div>
+            </div>
+
+
+
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="stat-val" id="cycles">0</span>
+                    <span class="stat-lbl">Cycles</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-val" id="elapsed">00:00</span>
+                    <span class="stat-lbl">Time</span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="resetBtn" class="btn btn-secondary">Reset</button>
+                <button id="startBtn" class="btn btn-primary">Start</button>
+            </div>
+            
+        </div>
+
+        <div class="settings-overlay" id="overlay">
+            <div class="settings-drawer" id="drawer">
+                <div class="drawer-header">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.72v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        <h3 style="font-size:1.2rem; font-weight:800;">Settings</h3>
+                    </div>
+                    <button class="close-btn" id="closeDrawer">&times;</button>
+                </div>
+
+                <div class="setting-item">
+                    <div class="section-title-row">
+                        <div class="section-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            <span>Breathing Pattern</span>
+                        </div>
+                        <button class="info-btn" id="patternInfoBtn" title="About this pattern">i</button>
+                    </div>
+                    <select id="difficulty">
+                        <option value="easy">Easy (8-16-8)</option>
+                        <option value="medium">Medium (16-32-22)</option>
+                        <option value="hard">Hard (16-64-32)</option>
+                        <option value="custom">Custom</option>
+                    </select>
+
+                    <div id="customControls">
+                        <div class="range-label"><span>Inhale</span><span id="inhaleVal">8s</span></div>
+                        <input id="inhaleRange" type="range" min="2" max="60" value="8">
+                        <div class="range-label"><span>Hold</span><span id="holdVal">16s</span></div>
+                        <input id="holdRange" type="range" min="0" max="120" value="16">
+                        <div class="range-label"><span>Exhale</span><span id="exhaleVal">8s</span></div>
+                        <input id="exhaleRange" type="range" min="2" max="60" value="8">
+                        <div class="range-label"><span>Relax</span><span id="relaxVal">10s</span></div>
+                        <input id="relaxRange" type="range" min="0" max="60" value="10">
+                        <button class="btn btn-secondary" id="savePresetBtn" style="margin-top: 15px; width: 100%;">+ Save Custom Pattern</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="section-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                        <span>Ambient Sound</span>
+                    </div>
+                    <select id="ambientSelect">
+                        <option value="none">None (Silent)</option>
+                        <option value="rain">Heavy Rain</option>
+                        <option value="wind">Forest Wind</option>
+                        <option value="white">Deep Focus</option>
+                    </select>
+                    <div class="range-label" style="margin-top:10px; margin-bottom:5px;"><span>Volume</span></div>
+                    <input type="range" id="ambientVol" min="0" max="1" step="0.05" value="0.3">
+                </div>
+
+                <div class="setting-item">
+                    <div class="section-title">
+                        <span style="color: #fbbf24;">★</span>
+                        <span>Saved Patterns</span>
+                    </div>
+                    <div id="savedPresetsList" class="presets-container"></div>
+                </div>
+
+                <div class="toggle-group">
+                    
+                    <div class="toggle-row">
+                        <div class="toggle-label">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><path d="M12 22a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v12a4 4 0 0 0 4 4z"></path></svg>
+                            <span>Nadi Shodhana (Alternate Nostril)</span>
+                        </div>
+                        <label class="switch"><input type="checkbox" id="nadiToggle"><span class="slider"></span></label>
+                    </div>
+
+                    <div class="toggle-row">
+                        <div class="toggle-label">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                            <span>Voice Guide</span>
+                        </div>
+                        <label class="switch"><input type="checkbox" id="voiceToggle" checked><span class="slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div class="toggle-label">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                            <span>Sound Effects</span>
+                        </div>
+                        <label class="switch"><input type="checkbox" id="soundToggle" checked><span class="slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div class="toggle-label">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
+                            <span>Vibration</span>
+                        </div>
+                        <label class="switch"><input type="checkbox" id="vibeToggle" checked><span class="slider"></span></label>
+                    </div>
+                </div>
+
+                <button class="history-btn-drawer" onclick="window.location.href='history.html'">
+                    View Practice History
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="infoModalOverlay">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Pattern Info</h3>
+                    <button class="close-modal" id="closeModalBtn">&times;</button>
+                </div>
+                <div class="modal-body" id="modalBody"></div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="zen-hint">Tap circle to show controls</div>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('SW registered'))
+            .catch(err => console.log('SW failed', err));
+        });
+      }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
